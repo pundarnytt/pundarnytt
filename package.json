@@ -12,7 +12,8 @@
     "generate:types": "payload generate:types",
     "generate:importmap": "payload generate:importmap",
     "test:smoke": "payload run scripts/smoke.ts",
-    "db:migrate": "payload migrate"
+    "db:migrate": "payload migrate",
+    "build:vercel": "payload migrate && next build"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "3.90.2",

@@ -88,13 +88,27 @@ Kör om typ-/importgenerering när CMS-konfigurationen ändras. `pnpm test:smoke
 
 ## Produktionsstart
 
-På en separat, tom produktionsdatabas:
+För en manuell produktionsstart utanför Vercel, med separat produktionsdatabas:
 
 ```bash
 pnpm db:migrate
 pnpm build
 pnpm start
 ```
+
+### Automatisk migrering på Vercel
+
+`vercel.json` anger `pnpm build:vercel` som Vercels byggkommando. Skriptet kör exakt:
+
+```bash
+payload migrate && next build
+```
+
+Vid varje Vercel-deployment applicerar Payload först väntande, redan committade migreringar från `migrations/` i den deployade Git-revisionen. Redan körda migreringar hoppas över. Inga migreringar genereras under deployment; skapa, granska och committa nya migreringsfiler och uppdaterat `migrations/index.ts` före push. Om migreringen misslyckas startar inte Next.js-bygget och deploymenten misslyckas.
+
+`pnpm build` är fortfarande enbart `next build` och migrerar inte databasen. Vercel behöver `DATABASE_URL`, `PAYLOAD_SECRET` och `BLOB_READ_WRITE_TOKEN` tillgängliga redan under byggsteget, och databasanslutningen måste tillåta migreringarnas schemaändringar. Samma byggkommando gäller även Preview: använd dess separata databas och miljövariabler, aldrig produktionsdatabasen.
+
+Migreringarna körs före bygget, så databasändringar återställs inte automatiskt om ett senare byggsteg misslyckas. Gör framtida migreringar kompatibla med den fortfarande körande deploymenten.
 
 En initial migrering finns i `migrations/`. Utvecklingens automatiska schema-push och produktionens migreringar är olika flöden: kör inte initialmigreringen ovanpå en redan pushad utvecklingsdatabas. För framtida schemaändringar, generera och granska en ny migrering med `pnpm payload migrate:create`.
 
@@ -112,7 +126,7 @@ Ange riktiga databasuppgifter, en egen `PAYLOAD_SECRET` och den publika HTTPS-ad
 1. Öppna projektets **Storage**, välj **Create Storage → Blob** och skapa/anslut en **Public** Blob-store. Den installerade Payload-adaptern använder publika objekt; privata Blob-stores stöds inte av denna konfiguration.
 2. Säkerställ att `BLOB_READ_WRITE_TOKEN` finns i projektets **Settings → Environment Variables** för **Production** och för varje **Preview**-miljö som ska köras. Behåll variabelnamnet exakt, utan `NEXT_PUBLIC_` eller eget prefix. Säkerställ att Vercels systemvariabler exponeras så `VERCEL=1` finns vid både build och runtime.
 3. Använd separata Blob-stores och databaser för Production och Preview, så testuppladdningar inte delar produktionsinnehåll. Koppla respektive token till rätt miljö.
-4. Kör `pnpm db:migrate` mot respektive databas före den nya deploymenten. Storage-adaptern behöver två interna Media-fält (`prefix` och `_objectKey`); den nya migreringen lägger till dessa utan att ändra Article eller befintliga relationer. Lokal utveckling får samma fält via Payloads schema-push.
+4. Vercels byggkommando kör committade migreringar automatiskt före Next.js-bygget mot respektive miljös `DATABASE_URL`. Storage-adaptern behöver två interna Media-fält (`prefix` och `_objectKey`); den nya migreringen lägger till dessa utan att ändra Article eller befintliga relationer. Lokal utveckling får samma fält via Payloads schema-push.
 5. Deploya om efter att miljövariablerna lagts till. Verifiera i `/admin` att en bild kan laddas upp, visas på en artikel och finns kvar efter en ny deployment. Testa även en bild större än 4,5 MB genom adminpanelen för att verifiera den direkta uppladdningsvägen.
 
 `Article.heroImage` refererar fortfarande till samma Media-dokument. Bildkomponenterna använder Payloads URL-fält och känner inte till Blob. Ett framtida byte till exempelvis R2 görs i `storage/mediaStorage.ts` med Payloads S3-adapter samt en separat flytt av lagrade objekt/metadata, utan att bygga om artikelschemat eller läsarsidorna.
