@@ -1,0 +1,55 @@
+@import "tailwindcss";
+:root { color-scheme: light; --paper: #faf9f6; --ink: #171715; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: Georgia, 'Times New Roman', serif; }
+a { color: inherit; text-underline-offset: .18em; }
+a:hover { text-decoration: underline; }
+a:focus-visible, button:focus-visible { outline: 3px solid #8b2821; outline-offset: 5px; }
+.masthead, .main-nav, main, footer { width: min(1180px, calc(100% - 48px)); margin-inline: auto; }
+.masthead { text-align: center; padding: 26px 0 20px; border-bottom: 5px solid; }
+.masthead > a { font-size: clamp(2.4rem, 10vw, 7.7rem); line-height: 1; letter-spacing: -.065em; font-weight: 900; text-decoration: none; }
+.masthead p { margin: 12px 0 0; font-family: Arial, sans-serif; font-size: .85rem; letter-spacing: .17em; }
+.main-nav { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; border-bottom: 1px solid; padding: 13px 0; font: 700 .75rem Arial, sans-serif; text-transform: uppercase; letter-spacing: .08em; }
+main { min-height: 45vh; padding-block: 26px 60px; }
+.section-title { font: 700 .8rem Arial, sans-serif; text-transform: uppercase; letter-spacing: .12em; border-bottom: 1px solid; padding-bottom: 12px; margin-bottom: 24px; }
+.story { min-width: 0; }
+.story h2 { font-size: clamp(1.7rem, 3vw, 2.3rem); line-height: 1.08; font-weight: 700; margin: 12px 0 18px; overflow-wrap: anywhere; }
+.story h2 a { text-decoration: none; }
+.story h2 a:hover { text-decoration: underline; }
+.lead { max-width: 940px; margin: 0 auto 36px; }
+.lead h2 { font-size: clamp(2.5rem, 5vw, 4.7rem); letter-spacing: -.035em; }
+.editorial-image { display: block; width: 100%; height: auto; margin-block: 20px; }
+.excerpt { font-size: 1.15rem; line-height: 1.55; margin-block: 12px; }
+.lead .excerpt { font-size: 1.4rem; }
+.story-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; border-top: 3px solid; padding-top: 24px; }
+.story-grid:empty { display: none; }
+.story-grid .story { padding-bottom: 22px; border-bottom: 1px solid #aaa; }
+.article-type { font: 700 .75rem Arial, sans-serif; letter-spacing: .12em; }
+.invented > span { display: inline-block; padding: 6px 9px; background: var(--ink); color: var(--paper); }
+.invented p { font: 400 .95rem/1.5 Arial, sans-serif; letter-spacing: 0; border-left: 3px solid; padding-left: 12px; margin-top: 12px; }
+.meta { color: #555; font: .8rem/1.7 Arial, sans-serif; }
+.article-page { max-width: 900px; margin-inline: auto; }
+.article-page h1 { font-size: clamp(2.5rem, 5.5vw, 4.8rem); font-weight: 700; line-height: 1.05; letter-spacing: -.035em; margin-block: 20px; overflow-wrap: anywhere; }
+.standfirst { font-size: 1.5rem; line-height: 1.5; margin-block: 20px; }
+.article-page .meta { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-block: 20px; }
+.article-body { max-width: 680px; margin: 36px auto; font-size: 1.2rem; line-height: 1.75; overflow-wrap: anywhere; }
+.article-body p, .article-body ul, .article-body ol { margin-block: 1.2em; }
+.article-body ul { list-style: disc; padding-left: 1.5em; }
+.article-body ol { list-style: decimal; padding-left: 1.5em; }
+.article-body h2, .article-body h3 { font-weight: 700; line-height: 1.2; margin-top: 1.5em; margin-bottom: .6em; }
+.article-body h2 { font-size: 1.8rem; }
+.article-body h3 { font-size: 1.4rem; }
+.article-body blockquote { border-left: 3px solid; padding-left: 24px; font-style: italic; }
+.article-body img { max-width: 100%; height: auto; }
+.article-details { border-top: 1px solid; padding-top: 18px; font: .9rem/1.8 Arial, sans-serif; }
+.pagination { display: flex; justify-content: center; flex-wrap: wrap; gap: 25px; margin-top: 32px; font: .9rem Arial, sans-serif; }
+.empty { padding: 65px 0; text-align: center; }
+.empty h1, .empty h2 { font-size: 2rem; font-weight: 700; margin-bottom: 16px; }
+.empty p { margin-block: 16px; }
+button { cursor: pointer; border: 1px solid; padding: 10px 18px; }
+footer { border-top: 4px solid; padding-block: 24px 40px; font: .8rem/1.6 Arial, sans-serif; }
+footer strong { font-family: Georgia, serif; font-size: 1.7rem; }
+footer p { margin-top: 8px; }
+.skip-link { position: absolute; left: 16px; top: -100px; background: white; padding: 12px; z-index: 20; }
+.skip-link:focus { top: 12px; }
+@media (max-width: 700px) { .masthead, .main-nav, main, footer { width: calc(100% - 32px); } .story-grid { grid-template-columns: 1fr; } .main-nav { font-size: .65rem; } .standfirst { font-size: 1.25rem; } .article-body { font-size: 1.1rem; } }
