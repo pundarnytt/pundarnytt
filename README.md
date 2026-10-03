@@ -11,6 +11,7 @@ En oberoende svensk nättidning: nyheter, intervjuer, reportage, debatt och tydl
 - `app/(payload)` innehåller Payloads adminpanel, serverfunktioner och standard-REST-API.
 - `collections` definierar Users, Articles, Authors, Categories, Tags och Media.
 - `lib/cms.ts` använder Payload Local API server-side med `overrideAccess: false`, `draft: false` och publiceringsfilter. Ingen separat backend eller klientbaserad CMS-hämtning.
+- `storage/mediaStorage.ts` väljer lokal disk eller Payloads officiella Vercel Blob-adapter.
 - `payload-types.ts` och adminpanelens `importMap.js` genereras från Payload-konfigurationen.
 
 Alla inloggade användare är betrodda redaktörer med samma rättigheter, inklusive användaradministration. Anonyma besökare kan läsa publicerade artiklar samt författare, kategorier, taggar och media, men aldrig skriva eller läsa artikelversioner. Media är offentligt: ladda inte upp konfidentiella bilder i denna milstolpe.
@@ -33,6 +34,7 @@ Sätt resultatet från sista kommandot som `PAYLOAD_SECRET` i `.env`.
 | `POSTGRES_PASSWORD` | Compose-databasens lösenord; måste stämma med anslutningssträngen. Lokal exempelstandard finns. |
 | `PAYLOAD_SECRET` | Slumpmässig, hemlig sträng för Payloads autentisering. Ingen standardnyckel. |
 | `NEXT_PUBLIC_SERVER_URL` | Webbplatsens absoluta adress för canonical/OpenGraph, lokalt `http://localhost:3000`. |
+| `BLOB_READ_WRITE_TOKEN` | Krävs i Vercel Production och Preview. Hemlig servervariabel från en publik Blob-store. Lämnas tom lokalt. |
 
 ```bash
 docker compose up -d
@@ -96,4 +98,25 @@ pnpm start
 
 En initial migrering finns i `migrations/`. Utvecklingens automatiska schema-push och produktionens migreringar är olika flöden: kör inte initialmigreringen ovanpå en redan pushad utvecklingsdatabas. För framtida schemaändringar, generera och granska en ny migrering med `pnpm payload migrate:create`.
 
-Ange riktiga databasuppgifter, en egen `PAYLOAD_SECRET` och den publika HTTPS-adressen. Driftmiljön behöver beständig disk för `media/` (eller senare en Payload-lagringsadapter), databasbackup och e-postadapter för lösenordsåterställning. Lokal Compose är utvecklingsmiljö, inte en färdig produktionsdrift. Ingen driftsättning ingår i denna milstolpe.
+Ange riktiga databasuppgifter, en egen `PAYLOAD_SECRET` och den publika HTTPS-adressen. På Vercel lagras bilder i Vercel Blob enligt anvisningarna nedan; deploymentens filsystem används inte för beständiga uppladdningar. Databasbackup och e-postadapter för lösenordsåterställning behövs fortfarande. Lokal Compose är utvecklingsmiljö, inte en färdig produktionsdrift. Ingen driftsättning ingår i denna milstolpe.
+
+
+## Medialagring: lokal utveckling och Vercel
+
+**Lokalt:** lämna `VERCEL` unset. `pnpm dev` och lokala `pnpm build`/`pnpm start` använder fortfarande `media/`, även om en Blob-token råkar finnas i miljön. Inget Blob-konto behövs. Säkerhetskopiera katalogen tillsammans med din lokala databas om du vill behålla innehållet.
+
+**Vercel Production och Preview:** plattformens automatiska `VERCEL=1` aktiverar `@payloadcms/storage-vercel-blob` (samma version som Payload). Saknad token stoppar konfigurationen i stället för att falla tillbaka till lokal disk. Adaptern stänger av lokal filskrivning och lagrar original och genererade bildstorlekar i Blob. Adminpanelen använder direkta klientuppladdningar för att kringgå Vercels gräns för serverförfrågningar; uppladdningar kräver fortfarande inloggning. Token förblir på servern. Egna REST-uppladdningar som skickar hela filen genom servern omfattas fortfarande av Vercels storleksgräns.
+
+### Vercel-dashboard
+
+1. Öppna projektets **Storage**, välj **Create Storage → Blob** och skapa/anslut en **Public** Blob-store. Den installerade Payload-adaptern använder publika objekt; privata Blob-stores stöds inte av denna konfiguration.
+2. Säkerställ att `BLOB_READ_WRITE_TOKEN` finns i projektets **Settings → Environment Variables** för **Production** och för varje **Preview**-miljö som ska köras. Behåll variabelnamnet exakt, utan `NEXT_PUBLIC_` eller eget prefix. Säkerställ att Vercels systemvariabler exponeras så `VERCEL=1` finns vid både build och runtime.
+3. Använd separata Blob-stores och databaser för Production och Preview, så testuppladdningar inte delar produktionsinnehåll. Koppla respektive token till rätt miljö.
+4. Kör `pnpm db:migrate` mot respektive databas före den nya deploymenten. Storage-adaptern behöver två interna Media-fält (`prefix` och `_objectKey`); den nya migreringen lägger till dessa utan att ändra Article eller befintliga relationer. Lokal utveckling får samma fält via Payloads schema-push.
+5. Deploya om efter att miljövariablerna lagts till. Verifiera i `/admin` att en bild kan laddas upp, visas på en artikel och finns kvar efter en ny deployment. Testa även en bild större än 4,5 MB genom adminpanelen för att verifiera den direkta uppladdningsvägen.
+
+`Article.heroImage` refererar fortfarande till samma Media-dokument. Bildkomponenterna använder Payloads URL-fält och känner inte till Blob. Ett framtida byte till exempelvis R2 görs i `storage/mediaStorage.ts` med Payloads S3-adapter samt en separat flytt av lagrade objekt/metadata, utan att bygga om artikelschemat eller läsarsidorna.
+
+Befintliga lokala bildfiler flyttas **inte** automatiskt till Blob. Innan en lokal databas återanvänds i produktion måste dess original och bildvarianter migreras, eller bilder laddas upp på nytt i motsvarande Media-dokument. Använd inte samma databas med både lokal disk och Blob.
+
+Källor: [Payloads storage-adaptrar](https://payloadcms.com/docs/upload/storage-adapters), [Vercels Blob-konfiguration](https://vercel.com/docs/vercel-blob/using-blob-sdk).

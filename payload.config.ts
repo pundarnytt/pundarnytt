@@ -10,10 +10,12 @@ import { Authors } from './collections/Authors';
 import { Categories } from './collections/Categories';
 import { Tags } from './collections/Tags';
 import { Media } from './collections/Media';
+import { mediaStorage } from './storage/mediaStorage';
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 export default buildConfig({
   admin: { user: 'users', importMap: { baseDir: dirname } },
   collections: [Users, Articles, Authors, Categories, Tags, Media],
+  plugins: [mediaStorage()],
   editor: lexicalEditor({ features: ({ defaultFeatures }) => [
     ...defaultFeatures.filter(feature => !['link', 'heading', 'relationship', 'upload'].includes(feature.key)),
     LinkFeature({ enabledCollections: [] }),
