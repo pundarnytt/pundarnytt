@@ -16,5 +16,11 @@ export const getCategory = cache(async (slug: string) => {
 });
 export async function getArticles(category?: number, page = 1) {
   const cms = await getCMS();
-  return cms.find({ collection: 'articles', overrideAccess: false, draft: false, depth: 1, limit: 13, page, sort: '-publishedAt', where: { and: [{ _status: { equals: 'published' } }, ...(category ? [{ category: { equals: category } }] : [])] } });
+  return cms.find({ collection: 'articles', overrideAccess: false, draft: false, depth: 1, limit: 13, page, sort: ['-publishedAt', '-id'], where: { and: [{ _status: { equals: 'published' } }, ...(category ? [{ category: { equals: category } }] : [])] } });
 }
+
+export const getCategories = cache(async () => {
+  const cms = await getCMS();
+  const result = await cms.find({ collection: 'categories', overrideAccess: false, depth: 0, pagination: false, sort: 'name' });
+  return result.docs;
+});

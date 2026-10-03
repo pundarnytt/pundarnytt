@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+
+<html lang="sv">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="web_standard" name="shell-type" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <style>
+        @layer base {
+
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                overscroll-behavior: none;
+            }
+
+            main>:first-child {
+                margin-top: 0 !important;
+            }
+
+            main>:last-child {
+                margin-bottom: 0 !important;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script
+        id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-bright": "#fdf9ef", "primary": "#000000", "on-secondary-fixed": "#410003", "primary-fixed": "#e3e2e3", "error-container": "#ffdad6", "surface-container-highest": "#e6e2d8", "inverse-on-surface": "#f5f0e6", "on-surface-variant": "#44474a", "secondary": "#b02c29", "inverse-surface": "#32312a", "surface-container-lowest": "#ffffff", "on-primary-fixed-variant": "#464748", "primary-fixed-dim": "#c7c6c7", "outline": "#75777a", "on-background": "#1c1c16", "outline-variant": "#c5c6c9", "surface": "#fdf9ef", "surface-container": "#f2eee3", "on-tertiary-container": "#7a849e", "error": "#ba1a1a", "on-error": "#ffffff", "on-tertiary-fixed": "#111b31", "on-secondary-container": "#650006", "surface-dim": "#dddad0", "on-tertiary": "#ffffff", "on-tertiary-fixed-variant": "#3d465e", "on-secondary-fixed-variant": "#8e1114", "tertiary": "#000000", "on-primary-fixed": "#1b1c1d", "surface-container-low": "#f7f3e9", "tertiary-fixed": "#d9e2ff", "primary-container": "#1b1c1d", "on-primary": "#ffffff", "on-primary-container": "#848485", "on-error-container": "#93000a", "on-surface": "#1c1c16", "surface-variant": "#e6e2d8", "tertiary-fixed-dim": "#bcc6e3", "surface-tint": "#5e5e5f", "surface-container-high": "#ece8de", "on-secondary": "#ffffff", "inverse-primary": "#c7c6c7", "secondary-fixed-dim": "#ffb4ac", "background": "#fdf9ef", "tertiary-container": "#111b31", "secondary-container": "#fc635a", "secondary-fixed": "#ffdad6" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin": "1.5rem", "space-md": "1rem", "space-xl": "2.5rem", "gutter": "1.25rem", "space-xs": "0.25rem", "space-sm": "0.5rem", "space-lg": "1.5rem" }, "fontFamily": { "body-sm": ["\"Source Serif 4\""], "body-md": ["\"Source Serif 4\""], "headline-lg-mobile": ["Newsreader"], "label-sm": ["Space Grotesk"], "label-md": ["Space Grotesk"], "display-xl": ["Newsreader"], "headline-md": ["Newsreader"], "label-lg": ["Space Grotesk"], "display-xl-mobile": ["Newsreader"], "body-lg": ["\"Source Serif 4\""], "headline-sm": ["Newsreader"], "headline-lg": ["Newsreader"] }, "fontSize": { "body-sm": ["13px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "400" }], "body-md": ["15px", { "lineHeight": "22px", "letterSpacing": "0.005em", "fontWeight": "400" }], "headline-lg-mobile": ["28px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "label-sm": ["9px", { "lineHeight": "12px", "letterSpacing": "0.12em", "fontWeight": "700" }], "label-md": ["11px", { "lineHeight": "14px", "letterSpacing": "0.1em", "fontWeight": "600" }], "display-xl": ["56px", { "lineHeight": "58px", "letterSpacing": "-0.03em", "fontWeight": "700" }], "headline-md": ["26px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "label-lg": ["13px", { "lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "700" }], "display-xl-mobile": ["38px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "body-lg": ["18px", { "lineHeight": "26px", "letterSpacing": "0em", "fontWeight": "400" }], "headline-sm": ["20px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "600" }], "headline-lg": ["36px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }] } } } };</script>
+</head>
+
+<body class="bg-background font-body-md text-on-surface antialiased">
+    <header class="w-full bg-surface">
+        <div class="w-full border-b border-outline-variant bg-surface-container-low">
+            <div
+                class="max-w-7xl mx-auto px-margin h-10 flex items-center justify-between font-label-md text-label-md uppercase text-on-surface-variant tracking-wider">
+                <div class="flex items-center gap-space-md"><span class="flex items-center gap-space-xs"><span
+                            class="material-symbols-outlined text-[16px]">calendar_today</span>Torsdag 24 Oktober
+                        2024</span><span class="hidden sm:inline-block text-outline">|</span><span
+                        class="hidden sm:inline-block">Stockholm +4°C Grådis</span><span
+                        class="hidden md:inline-block text-outline">|</span><span
+                        class="hidden md:inline-block font-bold text-secondary">Upplaga 14.892</span></div>
+                <div class="flex items-center gap-space-md"><span
+                        class="hidden lg:inline text-on-surface font-label-sm text-label-sm border border-outline px-space-xs py-0.5">Clandestine
+                        Press</span>
+                    <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span
+                            class="material-symbols-outlined text-on-primary text-[18px]">person</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-margin pt-space-lg pb-space-md text-center border-b-4 border-primary">
+            <div
+                class="flex items-center justify-between border-b border-outline-variant pb-space-xs mb-space-sm font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant">
+                <span class="text-left">Grundad 2011</span><span
+                    class="text-center font-bold tracking-[0.2em] text-primary">Rikstäckande Morgontidning</span><span
+                    class="text-right">Pris 38 SEK</span></div>
+            <h1
+                class="font-display-xl text-display-xl uppercase tracking-tight text-primary my-0 leading-none select-none font-bold">
+                PUNDARNYTT</h1>
+            <p class="font-body-md text-body-md italic text-on-surface mt-space-xs tracking-wide">Oberoende. Obekvämt.
+                Obehandlat.</p>
+        </div>
+        <div class="max-w-7xl mx-auto px-margin">
+            <div class="border-b border-t border-primary py-1 my-0.5">
+                <nav class="flex items-center justify-between overflow-x-auto py-1 gap-space-sm"
+                    data-active-classes="bg-primary text-on-primary font-bold"><a aria-current="page"
+                        class="px-space-md py-1 uppercase tracking-wider transition-colors whitespace-nowrap bg-primary text-on-primary font-bold"
+                        data-path="nyheter" href="#">NYHETER</a><a
+                        class="px-space-md py-1 font-label-lg text-label-lg uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors whitespace-nowrap"
+                        data-path="intervjuer" href="#">INTERVJUER</a><a
+                        class="px-space-md py-1 font-label-lg text-label-lg uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors whitespace-nowrap"
+                        data-path="reportage" href="#">REPORTAGE</a><a
+                        class="px-space-md py-1 font-label-lg text-label-lg uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors whitespace-nowrap"
+                        data-path="debatt" href="#">DEBATT</a><a
+                        class="px-space-md py-1 font-label-lg text-label-lg uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors whitespace-nowrap"
+                        data-path="kultur" href="#">KULTUR</a><a
+                        class="px-space-md py-1 font-label-lg text-label-lg uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors whitespace-nowrap"
+                        data-path="satir" href="#">SATIR</a><a
+                        class="px-space-md py-1 font-label-lg text-label-lg uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors whitespace-nowrap"
+                        data-path="fiktion" href="#">FIKTION</a></nav>
+            </div>
+        </div>
+    </header>
+    <main class="w-full bg-background min-h-[calc(100vh-340px)]">
+        <div class="flex flex-col w-full">
+            <!-- Breaking Flash / Just Nu Bar -->
+            <section class="w-full bg-surface-container-low border-b border-primary">
+                <div class="max-w-7xl mx-auto px-margin py-1.5 flex items-center justify-between text-on-surface">
+                    <div class="flex items-center gap-space-sm min-w-0">
+                        <span
+                            class="inline-flex items-center gap-1.5 bg-secondary text-on-secondary px-space-xs py-0.5 font-label-sm text-label-sm uppercase tracking-widest font-bold">
+                            <span class="w-2 h-2 rounded-full bg-surface-container-lowest animate-pulse"></span>
+                            JUST NU
+                        </span>
+                        <span class="font-label-md text-label-md text-secondary font-bold">14:22</span>
+                        <span class="text-outline hidden sm:inline">|</span>
+                        <p class="font-body-md text-body-md truncate font-medium text-primary">
+                            Fastighetsägarna i förhandlingar med okänd person som har huvudnyckeln till samtliga
+                            källarförråd i Hökarängen.
+                        </p>
+                    </div>
+                    <div
+                        class="hidden lg:flex items-center gap-space-xs font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider shrink-0 pl-space-md">
+                        <span>Telegram</span>
+                        <span class="font-bold text-primary">• TT-Klandestin</span>
+                    </div>
+                </div>
+            </section>
+            <!-- Editorial Main Canvas -->
+            <div class="max-w-7xl mx-auto px-margin w-full pt-space-lg pb-space-xl">
+                <!-- Editorial Section Header -->
+                <div class="flex items-end justify-between border-b-2 border-primary pb-1 mb-space-md">
+                    <div class="flex items-baseline gap-space-sm">
+                        <span
+                            class="font-label-lg text-label-lg uppercase tracking-widest text-primary font-bold">FÖRSTASIDAN</span>
+                        <span class="font-label-sm text-label-sm text-on-surface-variant uppercase hidden md:inline">—
+                            Morgonupplaga för Storstockholm med förorter</span>
+                    </div>
+                    <div class="font-label-sm text-label-sm uppercase text-outline flex items-center gap-space-xs">
+                        <span>Arkivkod: KÄLL-2410-X</span>
+                        <span>•</span>
+                        <span class="text-secondary font-bold">Verifikationsgrad: A1</span>
+                    </div>
+                </div>
+                <!-- Main Grid: 60% Left Lead / 40% Right Dispatch Column -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+                    <!-- Dominant Column (7 cols on lg) -->
+                    <article
+                        class="lg:col-span-7 flex flex-col relative lg:pr-space-md lg:border-r border-outline-variant">
+                        <!-- Registration crosshair & stamp -->
+                        <div class="flex items-center justify-between mb-space-sm">
+                            <div
+                                class="inline-block border border-on-surface-variant px-2 py-0.5 font-label-sm text-label-sm uppercase tracking-widest text-on-surface font-bold">
+                                GRANSKNING • REPORTAGE
+                            </div>
+                            <!-- Underground stamp element: Juridiskt granskad -->
+                            <div
+                                class="inline-flex items-center gap-1 border-2 border-secondary text-secondary px-2 py-0.5 font-label-sm text-label-sm uppercase font-bold transform -rotate-1 shadow-sm select-none">
+                                <span class="material-symbols-outlined text-[14px]">verified</span>
+                                KONTROLLERAD AV JURIST
+                            </div>
+                        </div>
+                        <!-- Huge Broadsheet Headline -->
+                        <h2
+                            class="font-display-xl text-headline-lg lg:text-display-xl text-primary font-bold leading-[1.05] tracking-tight mb-space-md">
+                            Vi gick ner i källaren. Ingen ville säga vem som hade nyckeln.
+                        </h2>
+                        <!-- Ingress / Deck -->
+                        <p class="font-body-lg text-body-lg text-on-surface font-normal leading-relaxed mb-space-md">
+                            <span
+                                class="float-left text-display-xl font-display-xl text-primary font-bold pr-2 pt-1 leading-none">B</span>akom
+                            den tunga branddörren på källarplan tre finns ett oreglerat nätverk av nätburar, trasiga
+                            motionscyklar och trettio år gamla bilbatterier. Vår granskning visar att
+                            bostadsrättsföreningen förlorat kontrollen över sina egna underjordiska kvadratmeter.
+                        </p>
+                        <!-- Byline strip -->
+                        <div
+                            class="flex flex-wrap items-center justify-between py-2 border-y border-outline-variant font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-space-md bg-surface-container-low px-space-xs">
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold text-primary">Av Torbjörn ”Tobbe” Lindqvist</span>
+                                <span>&amp; Redaktionens grävgrupp</span>
+                            </div>
+                            <div class="flex items-center gap-space-sm text-outline">
+                                <span>24 okt 2024 • 06:00</span>
+                                <span>•</span>
+                                <span class="text-primary font-bold">12 min läsning</span>
+                            </div>
+                        </div>
+                        <!-- Lead Photo Container -->
+                        <div class="w-full bg-surface-container-highest overflow-hidden mb-space-xs relative">
+                            <img alt="Dokumentärt fotografi från en lång, dämpat upplyst källargång med metallnätförråd och en stängd branddörr i fonden."
+                                class="w-full h-auto object-cover grayscale contrast-125"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA63fR7P4v0baENTJ94g0E_aeVUlQB35KZI8ZzU8F5Xkwp6fNve89xUkEuh2duZUTmsd9ml3a0Zz1rEUJf-Y_1HxCFiV7JZVdYWWifiibYH0NElH7FhkKwKqaTEYOL3y7FDu_X2Lv0lUBFTZCtOlk1nZQ_HA9Z8Z2gL27eW7oo-qHKIJqmlTuvryyhBaMJUaN3VP2JN1bGG4p8_Xefv6oj4n17I9lgeXF6L2WA4tZIzB2lj4b0uc1-M" />
+                            <div
+                                class="absolute top-2 left-2 bg-primary text-on-primary font-label-sm text-label-sm uppercase px-1.5 py-0.5">
+                                DOKUMENT: PLATS 3B
+                            </div>
+                        </div>
+                        <figcaption
+                            class="font-body-sm text-body-sm text-on-surface-variant italic mb-space-lg border-b border-outline-variant pb-space-sm">
+                            <strong>Foto:</strong> Redaktionen. Källargången under flerbostadshuset i Solna där
+                            cykelförrådet stått olåst sedan 2021. ”Det är som ett parallellt samhälle här nere,” uppger
+                            en boende som vill vara anonym.
+                        </figcaption>
+                        <!-- Two column editorial text flow -->
+                        <div
+                            class="grid grid-cols-1 md:grid-cols-2 gap-gutter font-body-md text-body-md leading-relaxed text-on-surface">
+                            <div class="space-y-space-md">
+                                <p>
+                                    I åtta månader har förvaltaren skickat rekommenderade brev till en adress i Huddinge
+                                    som upphörde att existera år 2017. Samtidigt har belysningen i källargång 4 bytts ut
+                                    mot en fast monterad röd lågenergilampa, kopplad direkt på tvättstugans
+                                    trefasledning.
+                                </p>
+                                <p>
+                                    – När vi frågade styrelsen hänvisade de till en pärm som försvann vid stambytet,
+                                    säger en andrehandshyresgäst. Det finns inga ritningar över vad som finns bakom
+                                    förråd 18C.
+                                </p>
+                            </div>
+                            <div class="space-y-space-md">
+                                <p>
+                                    Under golvplattorna löper telekablage från Televerkets gamla kopparnät som enligt
+                                    tekniska nämnden borde varit dött sedan millennieskiftet. Ändå hörs ett stadigt
+                                    analogt surrande bakom plåtreglarna varje kväll efter klockan tjugotvå.
+                                </p>
+                                <div
+                                    class="p-space-sm bg-surface-container border-l-2 border-primary italic font-body-sm text-body-sm text-on-surface">
+                                    ”De här förråden följer inte svensk hyreslagstiftning längre. Här råder
+                                    besittningsrätt grundad på vem som köpte det grövsta hänglåset på Bauhaus.”
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Footnote / Field report snippet -->
+                        <div
+                            class="mt-space-md pt-space-xs border-t border-dashed border-outline flex items-center justify-between text-outline font-label-sm text-label-sm uppercase">
+                            <span>Rapportserie: Det dolda Sverige • Del 1 av 4</span>
+                            <a class="text-secondary font-bold hover:underline flex items-center gap-1" href="#">
+                                Läs hela akten i låst PDF-läge <span
+                                    class="material-symbols-outlined text-[13px]">arrow_forward</span>
+                            </a>
+                        </div>
+                    </article>
+                    <!-- Secondary Column (5 cols on lg) -->
+                    <aside class="lg:col-span-5 flex flex-col space-y-space-lg">
+                        <!-- MODULE 1: INTERVJU -->
+                        <section class="border-b border-outline-variant pb-space-md">
+                            <div class="flex items-center justify-between mb-1">
+                                <span
+                                    class="border border-on-surface-variant px-1.5 py-0.2 font-label-sm text-label-sm uppercase font-bold text-on-surface">
+                                    INTERVJU
+                                </span>
+                                <span class="font-label-sm text-label-sm text-outline uppercase">Utskrift band 4</span>
+                            </div>
+                            <h3
+                                class="font-headline-sm text-headline-sm text-primary font-bold leading-snug mt-1 hover:text-secondary cursor-pointer">
+                                »Jag har varit portad här sedan 2019«
+                            </h3>
+                            <p class="font-body-md text-body-md text-on-surface mt-1 leading-normal">
+                                Mannen som vaktar bänken vid busstorget talar ut om relationen till ordningsvakterna,
+                                det kommunala förbudet mot väskor på perrongen och varför kaffet på Pressbyrån smakar
+                                sämre än förr.
+                            </p>
+                            <div
+                                class="flex items-center justify-between mt-space-sm pt-space-xs border-t border-outline-variant font-label-sm text-label-sm text-on-surface-variant uppercase">
+                                <span>Text: Sara Bergström</span>
+                                <span class="text-outline">4 min läsning</span>
+                            </div>
+                        </section>
+                        <!-- MODULE 2: NYHET (Solna Station Elskåp) -->
+                        <section class="border-b-2 border-primary pb-space-md">
+                            <div class="flex items-center justify-between mb-space-xs">
+                                <span
+                                    class="border border-on-surface-variant px-1.5 py-0.2 font-label-sm text-label-sm uppercase font-bold text-on-surface">
+                                    NYHET • SOLNA
+                                </span>
+                                <span class="font-label-sm text-label-sm text-secondary font-bold">UPPDATERAD
+                                    11:08</span>
+                            </div>
+                            <div class="grid grid-cols-12 gap-space-sm items-start mb-space-xs">
+                                <div class="col-span-5 bg-surface-container-highest overflow-hidden">
+                                    <img alt="Klistermärkesbelamrat grönt elskåp utanför Solna station i kalla kvällsfärger och förbipasserande pendlare."
+                                        class="w-full h-28 object-cover contrast-110"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJ3csuaYEB5uughtkRdv0EkZbxxuSUSEw6zXnxzdqMseQl5b4r7uPMq90JkDja2-lIrtrmweCOhRn9M2LcNijlueCiiz6eO0joe-ljV3Y_H9wLhny7eJrX60GXbzwDMiVOsT0_TKYavLviqubIwtLihhqxPld119N27Q38P3qgn1s5p_1IQKKN2X-HvmW808yOtvV61zy_LEJ1lodR6VEUzClr3NPFnvtJYKmqTuqneGs4JsFQESRY" />
+                                </div>
+                                <div class="col-span-7">
+                                    <h4
+                                        class="font-headline-sm text-[18px] leading-[22px] text-primary font-bold hover:text-secondary cursor-pointer">
+                                        Kommunen bytte låset igen – fem timmar senare satt ett hänglås på plats
+                                    </h4>
+                                    <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                                        Tekniska nämnden står handfallen inför den lokala gerillaverksamheten kring
+                                        förråd 4B.
+                                    </p>
+                                </div>
+                            </div>
+                            <figcaption class="font-body-sm text-[11px] text-outline italic">
+                                Elskåpet vid Solna station har återigen fått ett nytt lager affischer efter nattens
+                                städinsats.
+                            </figcaption>
+                        </section>
+                        <!-- MODULE 3: SATIR (HIGH VISIBILITY CLEARLY LABELLED STAMP) -->
+                        <section
+                            class="p-space-md bg-surface-container border-2 border-secondary relative overflow-hidden">
+                            <div class="flex items-center justify-between mb-space-xs">
+                                <!-- Crooked ink-stamp effect -->
+                                <div
+                                    class="inline-flex items-center gap-1 bg-secondary text-on-secondary px-2 py-0.5 font-label-md text-label-md uppercase font-bold tracking-widest transform -rotate-2 select-none shadow">
+                                    [ SATIR ]
+                                </div>
+                                <span
+                                    class="font-label-sm text-label-sm text-secondary font-bold uppercase tracking-wider">
+                                    Fiktiv text för underhållningsändamål
+                                </span>
+                            </div>
+                            <h4 class="font-headline-sm text-headline-sm text-primary font-bold leading-snug mt-1">
+                                Man med cykelverktyg hävdar att samtliga 47 cyklar utanför Coop är hans
+                            </h4>
+                            <p class="font-body-md text-body-md text-on-surface mt-space-xs italic">
+                                »Jag råkade bara glömma 47 koder samtidigt,« förklarar 38-åringen medan han lugnt kapar
+                                ett bygellås i fullt dagsljus med vinkelslip.
+                            </p>
+                            <div
+                                class="mt-space-sm pt-space-xs border-t border-outline-variant flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant uppercase">
+                                <span>Avdelning: Kåseri &amp; Humbug</span>
+                                <span class="text-secondary font-bold">Humor / Parodi</span>
+                            </div>
+                        </section>
+                        <!-- MODULE 4: FIKTION (HIGH VISIBILITY CLEARLY LABELLED STAMP) -->
+                        <section class="p-space-md bg-surface-container-low border border-primary relative">
+                            <div class="flex items-center justify-between mb-space-xs">
+                                <div
+                                    class="inline-block border-2 border-primary px-2 py-0.5 font-label-sm text-label-sm uppercase font-bold text-primary tracking-widest bg-surface">
+                                    [ FIKTION &amp; NOVELL ]
+                                </div>
+                                <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">
+                                    Underjordisk prosaserie
+                                </span>
+                            </div>
+                            <h4 class="font-headline-sm text-headline-sm text-primary font-bold leading-snug mt-1">
+                                Lokalt källarförråd utropar självständighet och begär inträde i FN
+                            </h4>
+                            <p class="font-body-sm text-body-sm text-on-surface mt-space-xs leading-relaxed">
+                                Efter sex månader utan hyresinbetalningar har förråd 12C deklarerat full suveränitet med
+                                egen valuta baserad på pantburkar och lössnus. Grannförrådet har redan tecknat
+                                icke-angreppspakt.
+                            </p>
+                            <div
+                                class="mt-space-sm pt-space-xs border-t border-outline flex items-center justify-between font-label-sm text-label-sm text-outline uppercase">
+                                <span>Författare: K. V. Jansson</span>
+                                <span>Kapitel 3 av 9</span>
+                            </div>
+                        </section>
+                    </aside>
+                </div>
+                <!-- LOWER BROADSHEET SECTION: SENASTE NYTT & KORTA NOTISER (4 COLUMNS) -->
+                <section class="mt-space-xl pt-space-md border-t-4 border-primary">
+                    <div class="flex items-center justify-between border-b border-primary pb-1 mb-space-md">
+                        <div class="flex items-baseline gap-space-sm">
+                            <h3
+                                class="font-display-xl text-headline-md uppercase font-bold tracking-tight text-primary">
+                                SENASTE NYTT &amp; KORTA NOTISER
+                            </h3>
+                            <span
+                                class="font-label-sm text-label-sm text-on-surface-variant uppercase hidden md:inline">
+                                Löpande telextråd • Uppdateras dygnet runt
+                            </span>
+                        </div>
+                        <div
+                            class="font-label-md text-label-md text-secondary uppercase font-bold flex items-center gap-1">
+                            <span class="w-2 h-2 rounded-full bg-secondary"></span>
+                            DIREKTSÄNDNING AKTIV
+                        </div>
+                    </div>
+                    <!-- 4 Columns Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter items-start">
+                        <!-- Column 1 -->
+                        <div class="space-y-space-md lg:pr-space-sm lg:border-r border-outline-variant">
+                            <article class="border-b border-outline-variant pb-space-sm">
+                                <div
+                                    class="flex items-center gap-2 font-label-md text-label-md text-secondary font-bold mb-1">
+                                    <span>13:45</span>
+                                    <span class="text-primary uppercase">• POLISRAPPORT</span>
+                                </div>
+                                <h5
+                                    class="font-headline-sm text-[16px] leading-[20px] font-bold text-primary hover:text-secondary cursor-pointer">
+                                    Oidentifierad doft av bränd elektronik i trappuppgång i Bagarmossen
+                                </h5>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                                    Räddningstjänsten ryckte ut men möttes av en pensionär som lödde om en
+                                    transistorradio från 1974. Ingen misstanke om brott kvarstår.
+                                </p>
+                            </article>
+                            <article class="pb-space-sm">
+                                <div
+                                    class="flex items-center gap-2 font-label-md text-label-md text-secondary font-bold mb-1">
+                                    <span>12:30</span>
+                                    <span class="text-primary uppercase">• DEBATT</span>
+                                </div>
+                                <h5
+                                    class="font-headline-sm text-[16px] leading-[20px] font-bold text-primary hover:text-secondary cursor-pointer">
+                                    »Det är inte stöld om man lämnar kvar en bättre grej i utbyte«
+                                </h5>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                                    En läsare i Högdalen pläderar för en ny syn på låneekonomin i gemensamma
+                                    grovsopprum.
+                                </p>
+                                <span class="font-label-sm text-label-sm text-outline uppercase block mt-1">Av: Anonym
+                                    debattör</span>
+                            </article>
+                        </div>
+                        <!-- Column 2 -->
+                        <div class="space-y-space-md lg:pr-space-sm lg:border-r border-outline-variant">
+                            <article class="border-b border-outline-variant pb-space-sm">
+                                <div
+                                    class="flex items-center gap-2 font-label-md text-label-md text-secondary font-bold mb-1">
+                                    <span>11:15</span>
+                                    <span class="text-primary uppercase">• KULTUR</span>
+                                </div>
+                                <h5
+                                    class="font-headline-sm text-[16px] leading-[20px] font-bold text-primary hover:text-secondary cursor-pointer">
+                                    Recension av lokala elskåpets klistermärkesflora
+                                </h5>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                                    Vår konstkritiker har inventerat 140 lager vinylklistermärken vid Odenplan. En
+                                    triumf för samtida motståndskonst och outtömligt arkivarbete.
+                                </p>
+                            </article>
+                            <article class="pb-space-sm">
+                                <div
+                                    class="flex items-center gap-2 font-label-md text-label-md text-secondary font-bold mb-1">
+                                    <span>10:02</span>
+                                    <span class="text-primary uppercase">• NOTIS</span>
+                                </div>
+                                <h5
+                                    class="font-headline-sm text-[16px] leading-[20px] font-bold text-primary hover:text-secondary cursor-pointer">
+                                    T-banespärr i Vällingby gav ifrån sig ovanligt melankoliskt pip
+                                </h5>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                                    Tekniker skickades ut efter att pendlare rapporterat att spärr C lät som ett döende
+                                    dragspel i dur.
+                                </p>
+                            </article>
+                        </div>
+                        <!-- Column 3 -->
+                        <div class="space-y-space-md lg:pr-space-sm lg:border-r border-outline-variant">
+                            <article class="border-b border-outline-variant pb-space-sm">
+                                <div
+                                    class="flex items-center gap-2 font-label-md text-label-md text-secondary font-bold mb-1">
+                                    <span>09:20</span>
+                                    <span class="text-primary uppercase">• REPORTAGE</span>
+                                </div>
+                                <h5
+                                    class="font-headline-sm text-[16px] leading-[20px] font-bold text-primary hover:text-secondary cursor-pointer">
+                                    24 timmar på nattbussen: Konsten att sova sittande med ögonen halvöppna
+                                </h5>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                                    Mellan Åkersberga och Gullmarsplan möts skiftarbetare, vilsna själar och folk som
+                                    förlorat sitt SL-kort sedan förra tisdagen.
+                                </p>
+                            </article>
+                            <article class="pb-space-sm">
+                                <div
+                                    class="flex items-center gap-2 font-label-md text-label-md text-secondary font-bold mb-1">
+                                    <span>08:40</span>
+                                    <span class="text-primary uppercase">• KRÖNIKA</span>
+                                </div>
+                                <h5
+                                    class="font-headline-sm text-[16px] leading-[20px] font-bold text-primary hover:text-secondary cursor-pointer">
+                                    Därför är pantmaskinen på Hemköp landets mest demokratiska plats
+                                </h5>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                                    Ingen bryr sig om vem du är när den röda lampan för ”Full behållare” börjar blinka.
+                                    Vi är alla lika inför krossen.
+                                </p>
+                            </article>
+                        </div>
+                        <!-- Column 4: Classifieds / Planket -->
+                        <div class="bg-surface-container p-space-sm border border-outline">
+                            <div class="border-b border-primary pb-1 mb-space-xs flex items-center justify-between">
+                                <span
+                                    class="font-label-md text-label-md uppercase font-bold text-primary tracking-widest">
+                                    PLANKET • RADISAR
+                                </span>
+                                <span class="font-label-sm text-label-sm text-secondary font-bold">KONTANT
+                                    BETALNING</span>
+                            </div>
+                            <div class="space-y-space-sm font-body-sm text-[12px] leading-tight text-on-surface">
+                                <div class="border-b border-dashed border-outline-variant pb-space-xs">
+                                    <span class="font-label-sm text-[10px] uppercase font-bold text-primary block">SÖKES
+                                        AKUT:</span>
+                                    Någon med 10mm hylsnyckel vid tunnelbanan Odenplan uppgång Karlbergsvägen. Står vid
+                                    biljettautomaten i grön parkas. Brådskande ärende.
+                                </div>
+                                <div class="border-b border-dashed border-outline-variant pb-space-xs">
+                                    <span
+                                        class="font-label-sm text-[10px] uppercase font-bold text-primary block">SÄLJES:</span>
+                                    Halvfull burk kopparpasta, två fungerande cykelslangar (dunlop-ventil) samt en rulle
+                                    silvertejp av industrikvalitet. Finns i källaren. Knacka tre gånger.
+                                </div>
+                                <div class="border-b border-dashed border-outline-variant pb-space-xs">
+                                    <span
+                                        class="font-label-sm text-[10px] uppercase font-bold text-secondary block">OBSERVERA
+                                        / VARNING:</span>
+                                    Ställ inte cyklar framför soprumsdörren på baksidan. Vi menar det på riktigt denna
+                                    gång. Ventilgummiradering sker utan förvarning.
+                                </div>
+                                <div class="pt-space-xs">
+                                    <span
+                                        class="font-label-sm text-[10px] uppercase font-bold text-primary block">HITTAT:</span>
+                                    Knippa med sju nycklar varav en märkt ”Förråd 3B – RÖR EJ” återfanns på bussen linje
+                                    4. Återfås mot beskrivning av nyckelringen.
+                                </div>
+                            </div>
+                            <div class="mt-space-sm pt-space-xs border-t border-outline text-center">
+                                <a class="font-label-sm text-label-sm uppercase font-bold text-primary hover:text-secondary tracking-wider block"
+                                    href="#">
+                                    + LÄMNA IN EGEN RADANNONS (15 KR)
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Bottom Broadside Dossier Strip / Underground Manifest Box -->
+                <section
+                    class="mt-space-lg p-space-md bg-surface-container-high border-t-2 border-b-2 border-primary flex flex-col md:flex-row items-center justify-between gap-space-md">
+                    <div class="flex items-center gap-space-md">
+                        <div
+                            class="w-10 h-10 border border-primary flex items-center justify-center font-display-xl text-headline-sm font-bold text-primary shrink-0 select-none">
+                            P
+                        </div>
+                        <div>
+                            <h4 class="font-headline-sm text-[18px] font-bold text-primary">
+                                Har du information om olovliga låsbyten eller kommunala källarhemligheter?
+                            </h4>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant">
+                                Vår krypterade tipslinje kan nås via Tor eller direkt i redaktionens fysiska brevinkast
+                                på Södermalm. Inga IP-adresser lagras någonsin.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-space-sm shrink-0 w-full md:w-auto">
+                        <button
+                            class="w-full md:w-auto bg-primary text-on-primary px-space-md py-2 font-label-md text-label-md uppercase font-bold tracking-wider hover:bg-secondary transition-colors">
+                            SKICKA KRYPTERAT TIPS
+                        </button>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+    <footer class="w-full bg-surface-container border-t-4 border-primary mt-space-xl">
+        <div class="max-w-7xl mx-auto px-margin py-space-xl">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-gutter pb-space-lg border-b border-outline-variant">
+                <div class="space-y-space-xs">
+                    <div class="font-headline-sm text-headline-sm font-bold text-primary uppercase tracking-tight">
+                        PUNDARNYTT</div>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant italic">Sveriges enda oberoende
+                        underjordiska morgonblad på tryckpapprets premisser.</p>
+                    <div
+                        class="pt-space-xs font-label-sm text-label-sm text-secondary uppercase border border-secondary inline-block px-space-xs py-0.5 font-bold">
+                        Censurresistent</div>
+                </div>
+                <div>
+                    <div
+                        class="font-label-md text-label-md uppercase font-bold text-primary mb-space-sm border-b border-outline pb-1">
+                        Redaktion</div>
+                    <ul class="space-y-1 font-body-sm text-body-sm text-on-surface-variant">
+                        <li>Ansvarig utgivare: M. Lindqvist</li>
+                        <li>Redaktionschef: E. Söderström</li>
+                        <li>Kriminal &amp; Granskning: J. Palm</li>
+                        <li>Kulturredaktör: S. Bergman</li>
+                    </ul>
+                </div>
+                <div>
+                    <div
+                        class="font-label-md text-label-md uppercase font-bold text-primary mb-space-sm border-b border-outline pb-1">
+                        Tryck &amp; Kontakt</div>
+                    <ul class="space-y-1 font-body-sm text-body-sm text-on-surface-variant">
+                        <li>Redaktionen: red@pundarnytt.se</li>
+                        <li>Krypterad tipsportal: Tor V3 länk</li>
+                        <li>Papper: 45g obestruket tidningspapper</li>
+                        <li>Rotationstryck: Värmlandspress AB</li>
+                    </ul>
+                </div>
+                <div>
+                    <div
+                        class="font-label-md text-label-md uppercase font-bold text-primary mb-space-sm border-b border-outline pb-1">
+                        Juridisk Kolofon</div>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">Eftertryck utan
+                        medgivande beivras ej, men källhänvisning förväntas enligt god publicistisk sed. Tryckt i
+                        enlighet med TF och YGL.</p>
+                </div>
+            </div>
+            <div
+                class="pt-space-md flex flex-col md:flex-row items-center justify-between text-on-surface-variant font-label-md text-label-md uppercase">
+                <p>© 2024 Pundarnytt Redaktionsförening. Alla rättigheter förbehållna.</p>
+                <div class="flex gap-space-md mt-space-sm md:mt-0 font-label-sm text-label-sm"><span
+                        class="text-primary font-bold">ISSN 2004-9123</span><span>* * *</span><span
+                        class="text-outline">Stockholm - Malmö - Göteborg</span></div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

@@ -16,7 +16,7 @@ export default async function CategoryPage({ params, searchParams }: Props) {
   if (!category) notFound();
   const page = pageNumber((await searchParams).sida);
   const result = await getArticles(category.id, page);
-  return <><h1 className="section-title">{category.name}</h1>{category.description && <p className="standfirst">{category.description}</p>}
+  return <><div className="section-heading"><h1>{category.name}</h1><span>Kategori / Senaste publicerat</span></div>{category.description && <p className="standfirst">{category.description}</p>}
     {result.docs.length ? <div className="story-grid">{result.docs.map(article => <ArticleCard key={article.id} article={article} />)}</div> : <p className="empty">Det finns inga publicerade artiklar här ännu.</p>}
     <Pagination page={page} hasNextPage={result.hasNextPage} base={`/kategori/${category.slug}`} />
   </>;

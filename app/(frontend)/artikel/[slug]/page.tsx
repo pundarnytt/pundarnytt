@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { RichText } from '@payloadcms/richtext-lexical/react';
 import { getArticle } from '@/lib/cms';
-import { formatDate } from '@/lib/format-date';
+import { ArticleMeta } from '@/components/ArticleMeta';
 import { ArticleType } from '@/components/ArticleType';
 import { EditorialImage } from '@/components/EditorialImage';
 export const dynamic = 'force-dynamic';
@@ -17,11 +17,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ArticlePage({ params }: Props) {
   const article = await getArticle((await params).slug);
   if (!article) notFound();
-  const author = typeof article.author === 'object' ? article.author : null;
   const category = typeof article.category === 'object' ? article.category : null;
   return <article className="article-page">
-    <header><ArticleType type={article.articleType} explain /><h1>{article.title}</h1><p className="standfirst">{article.excerpt}</p>
-    <p className="meta">{author && <span>Av {author.name}</span>}{article.publishedAt && <time dateTime={article.publishedAt}>Publicerad {formatDate(article.publishedAt)}</time>}</p></header>
+    <header><div className="story-kicker"><ArticleType type={article.articleType} explain />{category && <Link className="category-link" href={`/kategori/${category.slug}`}>{category.name}</Link>}</div><h1>{article.title}</h1><p className="standfirst">{article.excerpt}</p>
+    <ArticleMeta article={article} /></header>
     <EditorialImage media={article.heroImage} priority />
     <div className="article-body"><RichText data={article.content} /></div>
     <aside className="article-details" aria-label="Artikelinformation">
