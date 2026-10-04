@@ -4,6 +4,8 @@ import { selectHomepageArticles } from '@/lib/homepage';
 import { ArticleCard } from '@/components/ArticleCard';
 import { Pagination } from '@/components/Pagination';
 import { pageNumber } from '@/lib/format-date';
+import { MarketTicker } from '@/components/MarketTicker';
+import { Pundborsen } from '@/components/Pundborsen';
 
 export const dynamic = 'force-dynamic';
 export const metadata: Metadata = { alternates: { canonical: '/' } };
@@ -15,6 +17,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ s
 
   return (
     <>
+      <MarketTicker />
       <div className="section-heading frontpage-heading">
         <h1>{page === 1 ? 'Förstasidan' : 'Tidigare publicerat'}</h1>
         <span>Journalistik & andra berättelser</span>
@@ -46,6 +49,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ s
         </div>
       )}
       <Pagination page={page} hasNextPage={result.hasNextPage} base="/" />
+      {page === 1 && <Pundborsen />}
     </>
   );
 }
